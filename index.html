@@ -900,7 +900,6 @@ async function verifyZip(file) {
           ? '<span style="color:var(--yellow)">⚠ Artifact in ZIP does not match certificate hash (likely a compressed thumbnail from an older ZIP version).</span><br>'
           : '<span style="color:var(--yellow)">⚠ No artifact file included in this ZIP. Hash verification requires the original file.</span><br>';
 
-
       output.innerHTML = renderSteps(steps) +
         renderBanner(bannerType, bannerTitle,
           artifactNote +
