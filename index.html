@@ -892,13 +892,14 @@ async function verifyZip(file) {
       const bannerTitle = hashMatch 
         ? 'Valid — ledger-confirmed' 
         : hasArtifact 
-          ? 'Artifact mismatch — ledger-confirmed'
-          : 'No artifact — ledger-confirmed';
+          ? 'Artifact mismatch — ledger confirmed'
+          : 'Ledger confirmed';
       const artifactNote = hashMatch 
         ? 'Artifact hash matches certificate.<br>' 
         : hasArtifact
           ? '<span style="color:var(--yellow)">⚠ Artifact in ZIP does not match certificate hash (likely a compressed thumbnail from an older ZIP version).</span><br>'
           : '<span style="color:var(--yellow)">⚠ No artifact file included in this ZIP. Hash verification requires the original file.</span><br>';
+
 
       output.innerHTML = renderSteps(steps) +
         renderBanner(bannerType, bannerTitle,
