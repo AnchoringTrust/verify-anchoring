@@ -565,7 +565,7 @@ function renderBanner(type, title, text) {
 }
 
 function renderReset() {
-  return '<button class="reset-btn" onclick="resetUI()">← Verify another file</button>';
+  return '';
 }
 
 function escHtml(s) {
@@ -595,8 +595,16 @@ function resetUI() {
 
 // ─── Drop zone events ───
 let dragCounter = 0;
-dropZone.addEventListener('click', () => { if (!processing) fileInput.click(); });
-fileInput.addEventListener('change', e => { if (e.target.files[0] && !processing) handleFile(e.target.files[0]); });
+dropZone.addEventListener('click', () => {
+  if (processing) return;
+  fileInput.value = '';
+  fileInput.click();
+});
+fileInput.addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (file && !processing) handleFile(file);
+  e.target.value = '';
+});
 
 dropZone.addEventListener('dragenter', e => { e.preventDefault(); dragCounter++; dropZone.classList.add('dragging'); });
 dropZone.addEventListener('dragleave', e => { e.preventDefault(); dragCounter--; if (dragCounter === 0) dropZone.classList.remove('dragging'); });
@@ -675,6 +683,8 @@ async function verifyOtsProof(otsBuf, hashHex) {
 
 // ─── Main verification logic ───
 async function handleFile(file) {
+  if (processing) return;
+
   processing = true;
   dropZone.classList.add('disabled');
   output.innerHTML = '<div class="verifying-state"><div class="spinner"></div><p>Verifying…</p></div>';
@@ -692,6 +702,10 @@ async function handleFile(file) {
     }
   } catch (err) {
     showError('Verification failed: ' + (err.message || 'Unknown error'));
+  } finally {
+    processing = false;
+    dropZone.classList.remove('disabled');
+    fileInput.value = '';
   }
 }
 
