@@ -15,7 +15,7 @@
   --border: #1e1e22;
   --border-light: #2a2a30;
   --text: #e8e4dc;
-  --text-muted: #8a8680;
+  --text-muted: #a8a49c;
   --text-dim: #5a5652;
   --accent: #c4956a;
   --accent-dim: #c4956a66;
@@ -223,7 +223,7 @@ main {
   background: var(--surface);
 }
 .independence p {
-  font-size: 16px;
+  font-size: 18px;
   color: var(--text-muted);
   line-height: 1.7;
 }
@@ -438,7 +438,7 @@ footer a:hover { color: var(--text-muted); }
   <!-- ─── Entry point selector ─── -->
   <div style="display:flex;gap:0;margin-bottom:2rem;border:1px solid var(--border);border-radius:3px;overflow:hidden">
     <button id="tab-zip" onclick="switchTab('zip')" style="flex:1;padding:0.75rem 1rem;font-family:var(--mono);font-size:12px;letter-spacing:0.12em;text-transform:uppercase;border:none;cursor:pointer;transition:all 0.2s;background:var(--accent);color:var(--bg)">
-      Origin ZIP
+      Proof Bundle
     </button>
     <button id="tab-hash" onclick="switchTab('hash')" style="flex:1;padding:0.75rem 1rem;font-family:var(--mono);font-size:12px;letter-spacing:0.12em;text-transform:uppercase;border:none;cursor:pointer;transition:all 0.2s;background:var(--surface);color:var(--text-muted)">
       Hash + OTS
@@ -545,7 +545,7 @@ footer a:hover { color: var(--text-muted); }
       <strong style="color:var(--red)">invalid</strong> — hash mismatch or ledger proof invalid<br>
       <strong style="color:var(--yellow)">unverifiable</strong> — verification cannot be completed (e.g. missing artifact, missing ledger proof, network unavailable)
       <br><br>
-      No other interpretation is permitted.
+      No other interpretation is defined by the specification.
     </p>
   </div>
 
@@ -555,6 +555,8 @@ footer a:hover { color: var(--text-muted); }
     <p>
       This verifier makes zero API calls to Umarise, anchoring.app, or itexisted.app.
       It requires no account. It requires no login. It stores no data. It depends on no backend infrastructure.
+      <br><br>
+      Verification depends only on the artifact, the proof, and publicly verifiable ledger data.
       <br><br>
       Verification remains possible without the issuer of the proof.
       After a proof is created, no ongoing relationship with the issuing service is required for verification.
@@ -584,7 +586,7 @@ footer a:hover { color: var(--text-muted); }
       Any tool capable of computing SHA-256 and verifying OpenTimestamps proofs
       against the Bitcoin blockchain can independently validate an anchoring proof.
       <br><br>
-      Example: <code style="font-size:14px">ots verify certificate.ots</code>
+      Example: <code style="font-size:14px">ots verify proof.ots</code>
       (<a href="https://github.com/opentimestamps/opentimestamps-client" target="_blank" rel="noopener">OpenTimestamps CLI</a>)
     </p>
   </div>
@@ -608,7 +610,7 @@ footer a:hover { color: var(--text-muted); }
       <tbody style="color:var(--text)">
         <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">Hash match + ZIP parsing</td><td style="text-align:center;padding:5px 8px;color:var(--green)">✓</td><td style="text-align:center;padding:5px 8px;color:var(--green)">✓</td></tr>
         <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">OTS header check</td><td style="text-align:center;padding:5px 8px;color:var(--green)">✓</td><td style="text-align:center;padding:5px 8px;color:var(--green)">✓</td></tr>
-        <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">Bitcoin verification</td><td style="text-align:center;padding:5px 8px;color:var(--green)">✓ local OTS</td><td style="text-align:center;padding:5px 8px;color:var(--green)">✓ via API</td></tr>
+        <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">Bitcoin (via OpenTimestamps)</td><td style="text-align:center;padding:5px 8px;color:var(--green)">✓ local OTS</td><td style="text-align:center;padding:5px 8px;color:var(--green)">✓ via API</td></tr>
         <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">Registry lookup</td><td style="text-align:center;padding:5px 8px;color:var(--text-dim)">✗</td><td style="text-align:center;padding:5px 8px;color:var(--green)">✓</td></tr>
         <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">Works without Umarise</td><td style="text-align:center;padding:5px 8px;color:var(--green)">✓</td><td style="text-align:center;padding:5px 8px;color:var(--text-dim)">✗</td></tr>
         <tr style="border-bottom:1px solid var(--border)"><td style="padding:5px 8px">Offline mode</td><td style="text-align:center;padding:5px 8px;color:var(--green)">✓</td><td style="text-align:center;padding:5px 8px;color:var(--text-dim)">✗</td></tr>
