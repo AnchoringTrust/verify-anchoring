@@ -466,16 +466,19 @@ footer a:hover { color: var(--text-muted); }
   <div id="panel-hash" style="display:none">
     <p style="font-size:15px;color:var(--text);margin-bottom:0.5rem;font-family:var(--mono)">Verify by using the SHA-256 hash and its raw <code style="font-family:var(--mono);font-size:0.9em">.ots</code> proof file.</p>
 
+    <div style="margin-top:1.5rem;margin-bottom:0.5rem;font-family:var(--mono);font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent)">Step 1 · Paste your SHA-256 hash</div>
     <input type="text" id="hash-input" class="hash-input" placeholder="Paste SHA-256 hash (64 hex characters)" maxlength="71" spellcheck="false" autocomplete="off">
 
+    <div style="margin-top:1.5rem;margin-bottom:0.5rem;font-family:var(--mono);font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent)">Step 2 · Drop your <code style="font-family:var(--mono);font-size:0.9em;text-transform:none">.ots</code> proof file</div>
     <div id="ots-drop-zone" class="ots-drop-zone">
       <input type="file" id="ots-file-input" accept=".ots,.proof">
       <div class="drop-label" id="ots-drop-label">
         Drop your <code style="font-family:var(--mono);font-size:0.85em">.ots</code> or <code style="font-family:var(--mono);font-size:0.85em">.proof</code> file here or click to select
-        <small style="display:block;margin-top:0.3rem;font-size:13px;font-style:italic;color:var(--text-dim)">.proof files are auto-extracted — only proof.ots is used</small>
+        <small style="display:block;margin-top:0.3rem;font-size:13px;font-style:italic;color:var(--text-dim)">.proof files are auto-extracted, only proof.ots is used</small>
       </div>
     </div>
 
+    <div style="margin-top:1.5rem;margin-bottom:0.5rem;font-family:var(--mono);font-size:13px;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent)">Step 3 · Verify</div>
     <button id="dev-verify-btn" class="dev-verify-btn" disabled>Verify against Bitcoin</button>
 
     <div id="dev-output"></div>
