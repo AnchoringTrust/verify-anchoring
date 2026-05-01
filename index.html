@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>verify-anchoring.org — Independent Origin Verification</title>
+<title>verify-anchoring.org, Independent Origin Verification</title>
 <meta name="description" content="Reference implementation of the Anchoring Specification. Independently verify the existence and chronological anchoring of any origin proof. Zero platform dependency. Your file never leaves your browser.">
 <link rel="canonical" href="https://verify-anchoring.org">
 <style>
@@ -546,9 +546,9 @@ footer a:hover { color: var(--text-muted); }
     <h2 style="font-family:var(--mono);font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:0.75rem">Output Semantics</h2>
     <p>
       The verifier returns exactly one of:<br><br>
-      <strong style="color:var(--green)">valid</strong> — hash integrity confirmed and ledger proof verified<br>
-      <strong style="color:var(--red)">invalid</strong> — hash mismatch or ledger proof invalid<br>
-      <strong style="color:var(--yellow)">unverifiable</strong> — verification cannot be completed (e.g. missing artifact, missing ledger proof, network unavailable)
+      <strong style="color:var(--green)">valid</strong>, hash integrity confirmed and ledger proof verified<br>
+      <strong style="color:var(--red)">invalid</strong>, hash mismatch or ledger proof invalid<br>
+      <strong style="color:var(--yellow)">unverifiable</strong>, verification cannot be completed (e.g. missing artifact, missing ledger proof, network unavailable)
       <br><br>
       No other interpretation is defined by the specification.
     </p>
@@ -602,7 +602,7 @@ footer a:hover { color: var(--text-muted); }
     <p>
       This reference verifier performs: hash match, ZIP/certificate parsing, OTS header validation,
       Bitcoin ledger verification (via bundled OpenTimestamps library), and .ots proof download.
-      All verification runs locally in your browser — no backend, no API calls.
+      All verification runs locally in your browser, no backend, no API calls.
     </p>
     <table style="width:100%;border-collapse:collapse;margin:1rem 0;font-size:14px;font-family:var(--mono)">
       <thead>
@@ -640,10 +640,10 @@ footer a:hover { color: var(--text-muted); }
   <span style="font-style:italic">The specification is normative. This implementation is not.</span>
 </footer>
 
-<!-- JSZip — bundled locally for zero CDN dependency -->
+<!-- JSZip, bundled locally for zero CDN dependency -->
 <script src="vendor/jszip.min.js"></script>
 
-<!-- OpenTimestamps library — bundled locally for zero CDN dependency -->
+<!-- OpenTimestamps library, bundled locally for zero CDN dependency -->
 <script src="vendor/opentimestamps.min.js"></script>
 
 <script>
@@ -862,7 +862,7 @@ async function handleFile(file) {
 async function verifyZip(file) {
   const steps = [];
 
-  // 1. Open ZIP — with diagnostic magic byte check
+  // 1. Open ZIP, with diagnostic magic byte check
   let zip;
   let buf;
   try {
@@ -978,9 +978,9 @@ async function verifyZip(file) {
   if (cert.identity_binding && cert.identity_binding.level) {
     const ib = cert.identity_binding;
     const levelLabels = {
-      'L1': 'L1 — self-asserted (passkey only)',
-      'L2': 'L2 — KYC / video-ident verified',
-      'L3': 'L3 — notarial verification'
+      'L1': 'L1, self-asserted (passkey only)',
+      'L2': 'L2, KYC / video-ident verified',
+      'L3': 'L3, notarial verification'
     };
     const levelLabel = levelLabels[ib.level] || ib.level;
     steps.push({ label: 'Identity binding: ' + levelLabel, status: 'info' });
@@ -1097,9 +1097,9 @@ async function verifyZip(file) {
 
       const bannerType = hashMatch ? 'verified' : 'pending';
       const bannerTitle = hashMatch 
-        ? 'Valid — ledger-confirmed' 
+        ? 'Valid, ledger-confirmed' 
         : hasArtifact 
-          ? 'Artifact mismatch — ledger confirmed'
+          ? 'Artifact mismatch, ledger confirmed'
           : 'Ledger confirmed';
       const artifactNote = hashMatch 
         ? 'Artifact hash matches certificate.<br>' 
@@ -1120,7 +1120,7 @@ async function verifyZip(file) {
       steps.push({ label: 'Bitcoin anchoring pending', status: 'warn', detail: 'The proof has been submitted to calendar servers but is not yet confirmed in a Bitcoin block' });
 
       output.innerHTML = renderSteps(steps) +
-        renderBanner('pending', 'Valid (bytes) — ledger pending',
+        renderBanner('pending', 'Valid (bytes), ledger pending',
           (hashMatch ? 'Artifact hash matches certificate.<br>' : '') +
           'A Bitcoin timestamp proof file (.ots) is included but not yet confirmed in a Bitcoin block. ' +
           'This typically resolves within a few hours. ' +
@@ -1138,7 +1138,7 @@ async function verifyZip(file) {
         ? 'Artifact hash matches certificate.<br>' 
         : (artifactFiles.length > 0 ? '<span style="color:var(--yellow)">⚠ Artifact in ZIP does not match certificate hash (likely a compressed thumbnail from an older ZIP version).</span><br>' : '');
 
-      const bannerTitle = hashMatch ? 'Valid (bytes) — ledger unverifiable' : (artifactFiles.length > 0 ? 'Artifact mismatch — ledger unverifiable' : 'Certificate only — ledger unverifiable');
+      const bannerTitle = hashMatch ? 'Valid (bytes), ledger unverifiable' : (artifactFiles.length > 0 ? 'Artifact mismatch, ledger unverifiable' : 'Certificate only, ledger unverifiable');
 
       output.innerHTML = renderSteps(steps) +
         renderBanner('pending', bannerTitle,
@@ -1156,7 +1156,7 @@ async function verifyZip(file) {
       steps.push({ label: 'No Bitcoin attestation found in proof', status: 'warn' });
 
       output.innerHTML = renderSteps(steps) +
-        renderBanner('pending', hashMatch ? 'Valid (bytes) — ledger unverifiable' : 'Unverifiable',
+        renderBanner('pending', hashMatch ? 'Valid (bytes), ledger unverifiable' : 'Unverifiable',
           (hashMatch ? 'Artifact hash matches certificate.<br>' : '') +
           'The .ots file does not contain a completed Bitcoin attestation. ' +
           'It may need to be upgraded first. Try <a href="https://opentimestamps.org" target="_blank" rel="noopener" style="color:var(--accent)">opentimestamps.org</a>.' +
@@ -1169,7 +1169,7 @@ async function verifyZip(file) {
 
     if (hashMatch) {
       output.innerHTML = renderSteps(steps) +
-        renderBanner('consistent', 'Valid (bytes) — ledger unverifiable',
+        renderBanner('consistent', 'Valid (bytes), ledger unverifiable',
           'Artifact hash matches certificate.<br><br>' +
           'No .ots proof was included in this ZIP. Without the OpenTimestamps proof, ' +
           'the Bitcoin anchoring cannot be verified here. ' +
@@ -1179,7 +1179,7 @@ async function verifyZip(file) {
         renderReset();
     } else if (artifactFiles.length > 0 && !hashMatch) {
       output.innerHTML = renderSteps(steps) +
-        renderBanner('failed', 'Artifact mismatch — ledger unverifiable',
+        renderBanner('failed', 'Artifact mismatch, ledger unverifiable',
           'The artifact in this ZIP does not match the certificate hash. ' +
           'This may be a compressed preview from an older ZIP version.<br><br>' +
           'No .ots proof was included, so Bitcoin anchoring cannot be verified here either. ' +
@@ -1190,7 +1190,7 @@ async function verifyZip(file) {
         renderReset();
     } else {
       output.innerHTML = renderSteps(steps) +
-        renderBanner('pending', 'Certificate only — ledger unverifiable',
+        renderBanner('pending', 'Certificate only, ledger unverifiable',
           'The certificate was readable but no artifact was included for hash recomputation.<br><br>' +
           'No .ots proof was included. The anchor may still be pending, or the proof was not yet available when this ZIP was generated.'
         ) +
@@ -1292,7 +1292,7 @@ async function setOtsFile(f) {
   const isZip = (magic[0] === 0x50 && magic[1] === 0x4B && magic[2] === 0x03 && magic[3] === 0x04);
 
   if (isZip && typeof JSZip !== 'undefined') {
-    // .proof file (CLI ZIP bundle) — extract proof.ots
+    // .proof file (CLI ZIP bundle), extract proof.ots
     try {
       const zip = await JSZip.loadAsync(buf);
       const otsFile = zip.file('proof.ots');
@@ -1366,7 +1366,7 @@ devVerifyBtn.addEventListener('click', async () => {
       '</div>';
 
     devOutput.innerHTML = renderSteps(steps) +
-      renderBanner('verified', 'Valid — ledger-confirmed',
+      renderBanner('verified', 'Valid, ledger-confirmed',
         'Hash anchored in the Bitcoin blockchain.' +
         ledgerDetails +
         '<br><span style="font-size:0.78rem;color:var(--text-dim)">VALID does not imply authorship, ownership, or truth.</span>' +
