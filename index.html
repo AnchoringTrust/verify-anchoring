@@ -1052,12 +1052,12 @@ async function verifyZip(file) {
       steps.pop(); // Remove "Contacting…"
       steps.push({ label: 'Bitcoin ledger verification confirmed', status: 'ok' });
       steps.push({ label: 'Block height: ' + otsResult.height, status: 'ok' });
-      steps.push({ label: 'Ledger timestamp: ' + formatTimestamp(otsResult.timestamp), status: 'ok' });
+      steps.push({ label: 'Block timestamp: ' + formatTimestamp(otsResult.timestamp) + ' (Reference Wall-Clock Projection)', status: 'ok' });
 
       const ledgerDetails =
         '<div class="ledger-details">' +
-          '<span class="label">Bitcoin block</span> ' + otsResult.height + '<br>' +
-          '<span class="label">Ledger timestamp</span> ' + formatTimestamp(otsResult.timestamp) + '<br>' +
+          '<span class="label">Bitcoin block</span> ' + otsResult.height + ' (normative binding)<br>' +
+          '<span class="label">Block timestamp</span> ' + formatTimestamp(otsResult.timestamp) + ' (Reference Wall-Clock Projection)<br>' +
           '<span class="label">Interpretation</span> This file provably existed before block ' + otsResult.height + ' was mined.' +
         '</div>';
 
@@ -1324,12 +1324,12 @@ devVerifyBtn.addEventListener('click', async () => {
     steps.pop();
     steps.push({ label: 'Bitcoin ledger verification confirmed', status: 'ok' });
     steps.push({ label: 'Block height: ' + otsResult.height, status: 'ok' });
-    steps.push({ label: 'Ledger timestamp: ' + formatTimestamp(otsResult.timestamp), status: 'ok' });
+    steps.push({ label: 'Block timestamp: ' + formatTimestamp(otsResult.timestamp) + ' (Reference Wall-Clock Projection)', status: 'ok' });
 
     const ledgerDetails =
       '<div class="ledger-details">' +
-        '<span class="label">Bitcoin block</span> ' + otsResult.height + '<br>' +
-        '<span class="label">Ledger timestamp</span> ' + formatTimestamp(otsResult.timestamp) + '<br>' +
+        '<span class="label">Bitcoin block</span> ' + otsResult.height + ' (normative binding)<br>' +
+        '<span class="label">Block timestamp</span> ' + formatTimestamp(otsResult.timestamp) + ' (Reference Wall-Clock Projection)<br>' +
         '<span class="label">Interpretation</span> This hash provably existed before block ' + otsResult.height + ' was mined.' +
       '</div>';
 
